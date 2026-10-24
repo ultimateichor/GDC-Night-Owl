@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class CockpitCamera : MonoBehaviour
 {
     private Quaternion defaultRotation;
+    private Vector3 lookLeftEuler;
+    private Vector3 lookRightEuler;
     private Quaternion rotateTo;
     private Vector3 defaultPosition;
     public UnityEvent switchCamera;
@@ -16,11 +18,20 @@ public class CockpitCamera : MonoBehaviour
     [SerializeField] private float rotateTime = 5f;
     [SerializeField] private float angleThreshold = 1.0f;
 
+    private bool lookingLeft = false;
+    private bool lookingRight = false;
+
     private void Start()
     {
         defaultRotation = transform.rotation;
         defaultPosition = transform.position;
         rotateTo = defaultRotation;
+
+        lookLeftEuler = defaultRotation.eulerAngles;
+        lookLeftEuler.y -= rotateLeftBy;
+
+        lookRightEuler = defaultRotation.eulerAngles;
+        lookRightEuler.y += rotateRightBy;
     }
 
     private void Update()
@@ -51,20 +62,36 @@ public class CockpitCamera : MonoBehaviour
 
     public void RotateLeft()
     {
-        if (rotateTo != defaultRotation) return;
+        if (lookingLeft) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.y -= rotateLeftBy;
-        rotateTo = Quaternion.Euler(newEuler);
+        if (lookingRight)
+        {
+            lookingRight = false;
+            RotateStraight();
+        }
+        else
+        {
+            rotateTo = Quaternion.Euler(lookLeftEuler);
+            lookingLeft = true;
+        }
+
         Debug.Log("Rotate left");
     }
     public void RotateRight()
     {
-        if (rotateTo != defaultRotation) return;
+        if (lookingRight) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.y += rotateRightBy;
-        rotateTo = Quaternion.Euler(newEuler);
+        if (lookingLeft)
+        {
+            lookingLeft = false;
+            RotateStraight();
+        }
+        else
+        {
+            rotateTo = Quaternion.Euler(lookRightEuler);
+            lookingRight = true;
+        }
+
         Debug.Log("Rotate right");
     }
 
@@ -72,17 +99,22 @@ public class CockpitCamera : MonoBehaviour
     {
         if (rotateTo != defaultRotation) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
+        Vector3 newEuler = transform.rotation.eulerAngles;
         newEuler.x -= rotateUpBy;
         rotateTo = Quaternion.Euler(newEuler);
         Debug.Log("Rotate up");
+    }
+
+    public void RotateForward()
+    {
+
     }
 
     public void RotateDown()
     {
         if (rotateTo != defaultRotation) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
+        Vector3 newEuler = transform.rotation.eulerAngles;
         newEuler.x += rotateUpBy;
         rotateTo = Quaternion.Euler(newEuler);
         Debug.Log("Rotate down");
