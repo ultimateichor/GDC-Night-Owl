@@ -13,8 +13,8 @@ public class CockpitCamera : MonoBehaviour
     public UnityEvent topDown;
     [SerializeField] private float rotateLeftBy = 10f;
     [SerializeField] private float rotateRightBy = 10f;
-    [SerializeField] private float rotateUpBy = 10f;
-    [SerializeField] private float rotateDownBy = 10f;
+    //[SerializeField] private float rotateUpBy = 10f;
+    //[SerializeField] private float rotateDownBy = 10f;
     [SerializeField] private float rotateTime = 5f;
     [SerializeField] private float angleThreshold = 1.0f;
 
@@ -95,30 +95,30 @@ public class CockpitCamera : MonoBehaviour
         Debug.Log("Rotate right");
     }
 
-    public void RotateUp()
-    {
-        if (rotateTo != defaultRotation) return;
+    //public void RotateUp(float rotateUpBy)
+    //{
+    //    if (rotateTo != defaultRotation) return;
 
-        Vector3 newEuler = transform.rotation.eulerAngles;
-        newEuler.x -= rotateUpBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate up");
-    }
+    //    Vector3 newEuler = transform.rotation.eulerAngles;
+    //    newEuler.x -= rotateUpBy;
+    //    rotateTo = Quaternion.Euler(newEuler);
+    //    Debug.Log("Rotate up");
+    //}
 
-    public void RotateForward()
-    {
+    //public void RotateForward()
+    //{
 
-    }
+    //}
 
-    public void RotateDown()
-    {
-        if (rotateTo != defaultRotation) return;
+    //public void RotateDown(float rotateDownBy)
+    //{
+    //    if (rotateTo != defaultRotation) return;
 
-        Vector3 newEuler = transform.rotation.eulerAngles;
-        newEuler.x += rotateUpBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate down");
-    }
+    //    Vector3 newEuler = transform.rotation.eulerAngles;
+    //    newEuler.x += rotateDownBy;
+    //    rotateTo = Quaternion.Euler(newEuler);
+    //    Debug.Log("Rotate down");
+    //}
 
     public void RotateStraight()
     {
