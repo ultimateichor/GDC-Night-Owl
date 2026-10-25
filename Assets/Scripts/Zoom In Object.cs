@@ -37,16 +37,7 @@ public class ZoomInObject : MonoBehaviour
         }
         if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Vector2 mousePos = Mouse.current.position.ReadValue();
-            Ray ray = Camera.main.ScreenPointToRay(mousePos);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.transform == this.transform)
-                {
-                    UnZoomIn();
-                }
-            }
+            ZoomOut();
         }
     }
 
@@ -59,7 +50,7 @@ public class ZoomInObject : MonoBehaviour
         isZoomedIn = true;
     }
 
-    private void UnZoomIn()
+    private void ZoomOut()
     {
         if (!isZoomedIn) return;
         Debug.Log("Player pressed the button to unzoom");
