@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private bool wonGame;
     private float survivalTimer;
     private int roundedSurvivalTimer;
+    public UnityEvent OnRestart;
 
     private void Start()
     {
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         survivalTimer = 0f;
         deathScreen.gameObject.SetActive(false);
         winScreen.gameObject.SetActive(false);
+        OnRestart.Invoke();
         Debug.Log("Restarted Game");
     }
 
