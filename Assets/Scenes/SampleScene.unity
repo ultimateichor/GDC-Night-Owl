@@ -1558,40 +1558,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15665d187e1dddf43bd6147be12e9a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CockpitCamera
-  switchCamera:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1838088222}
-        m_TargetAssemblyTypeName: CameraSwapper, Assembly-CSharp
-        m_MethodName: SwitchToTrainCarCam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  topDown:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1838088222}
-        m_TargetAssemblyTypeName: CameraSwapper, Assembly-CSharp
-        m_MethodName: SwitchToOutsideCamera
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   rotateLeftBy: 90
   rotateRightBy: 90
   rotateTime: 5
+  moveTime: 5
   angleThreshold: 1
+  moveThreshold: 0.025
 --- !u!1 &393988350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,6 +2589,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 526057518}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &582662850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 582662851}
+  m_Layer: 0
+  m_Name: Camera Zoom In Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &582662851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582662850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.9000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1207285782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &583233083
 GameObject:
   m_ObjectHideFlags: 0
@@ -5661,6 +5664,7 @@ GameObject:
   - component: {fileID: 1207285781}
   - component: {fileID: 1207285780}
   - component: {fileID: 1207285779}
+  - component: {fileID: 1207285783}
   m_Layer: 0
   m_Name: Console
   m_TagString: Untagged
@@ -5758,9 +5762,53 @@ Transform:
   m_LocalPosition: {x: 1, y: 0.9242641, z: 3.1313705}
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 582662851}
   m_Father: {fileID: 795965313}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!114 &1207285783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207285778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0d71eebd14edc4586e11b49ed0f056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ZoomInObject
+  zoomObject: {fileID: 582662850}
+  Zoom:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CockpitCamera, Assembly-CSharp
+        m_MethodName: ZoomIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  UnZoom:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CockpitCamera, Assembly-CSharp
+        m_MethodName: ZoomOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1215734612
 GameObject:
   m_ObjectHideFlags: 0

@@ -141,11 +141,13 @@ public class CockpitCamera : MonoBehaviour
         moveTo = movePosition;
         zoomInRotation = moveRotation;
         zoomedIn = true;
+        Debug.Log("Zoomed in");
     }
 
     public void ZoomOut()
     {
         moveTo = defaultPosition;
         zoomedIn = false;
+        Debug.Log("Zoomed out");
     }
 }
