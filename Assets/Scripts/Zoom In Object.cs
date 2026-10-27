@@ -6,7 +6,7 @@ public class ZoomInObject : MonoBehaviour
 {
     [SerializeField] private GameObject zoomObject;
 
-    private bool isZoomedIn;
+    public bool isZoomedIn;
     public UnityEvent<Vector3, Quaternion> Zoom;
     public UnityEvent UnZoom;
 
