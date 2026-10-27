@@ -5,12 +5,15 @@ public class TrainMovement : MonoBehaviour
 {
     [SerializeField] private GameObject console;
     [SerializeField] private float maxMoveSpeed = 3f;
-    [SerializeField] private float maxFuelDownTimer = 10f;
     [SerializeField] private int maxFuelAmount = 10;
+    [SerializeField] private float fastFuelDownSpeed = 5f;
+    [SerializeField] private float mediumFuelDownSpeed = 10f;
+    [SerializeField] private float slowFuelDownSpeed = 15f;
 
     private float fuelDownTimer;
     private int currentMoveSpeed;
     private int currentFuelAmount;
+    private float currentFuelDownSpeed;
 
     private void Start()
     {
@@ -28,7 +31,23 @@ public class TrainMovement : MonoBehaviour
     {
         fuelDownTimer += 1 * Time.deltaTime;
 
-        if (Mathf.RoundToInt(fuelDownTimer) >= maxFuelDownTimer)
+        switch (currentMoveSpeed)
+        {
+            case 1:
+                currentFuelDownSpeed = slowFuelDownSpeed;
+                break;
+            case 2:
+                currentFuelDownSpeed = mediumFuelDownSpeed;
+                break;
+            case 3:
+                currentFuelDownSpeed = fastFuelDownSpeed;
+                break;
+            default:
+                currentFuelDownSpeed = 0f;
+                break;
+        }
+
+        if (Mathf.RoundToInt(fuelDownTimer) >= currentFuelDownSpeed)
         {
             if (currentFuelAmount > 0)
             {
