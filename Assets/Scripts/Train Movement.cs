@@ -47,7 +47,7 @@ public class TrainMovement : MonoBehaviour
                 break;
         }
 
-        if (Mathf.RoundToInt(fuelDownTimer) >= currentFuelDownSpeed)
+        if (Mathf.RoundToInt(fuelDownTimer) >= currentFuelDownSpeed || currentFuelDownSpeed != 0)
         {
             if (currentFuelAmount > 0)
             {
