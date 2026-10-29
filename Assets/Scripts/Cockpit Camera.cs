@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -5,87 +6,126 @@ using UnityEngine.InputSystem;
 public class CockpitCamera : MonoBehaviour
 {
     private Quaternion defaultRotation;
-    private Quaternion rotateTo;
     private Vector3 defaultPosition;
-    public UnityEvent switchCamera;
-    public UnityEvent topDown;
+    private Vector3 lookLeftEuler;
+    private Vector3 lookRightEuler;
+    private Quaternion rotateTo;
+    private Quaternion zoomInRotation;
+    private Vector3 moveTo;
+    //public UnityEvent switchCamera;
+    //public UnityEvent topDown;
     [SerializeField] private float rotateLeftBy = 10f;
     [SerializeField] private float rotateRightBy = 10f;
-    [SerializeField] private float rotateUpBy = 10f;
-    [SerializeField] private float rotateDownBy = 10f;
     [SerializeField] private float rotateTime = 5f;
+    [SerializeField] private float moveTime = 5f;
     [SerializeField] private float angleThreshold = 1.0f;
+    [SerializeField] private float moveThreshold = 1.0f;
+
+    private bool lookingLeft = false;
+    private bool lookingRight = false;
+    private bool zoomedIn = false;
 
     private void Start()
     {
         defaultRotation = transform.rotation;
         defaultPosition = transform.position;
         rotateTo = defaultRotation;
+        moveTo = defaultPosition;
+        zoomInRotation = transform.rotation;
+
+        lookLeftEuler = defaultRotation.eulerAngles;
+        lookLeftEuler.y -= rotateLeftBy;
+
+        lookRightEuler = defaultRotation.eulerAngles;
+        lookRightEuler.y += rotateRightBy;
     }
 
     private void Update()
     {
-        float angleDifference = Quaternion.Angle(transform.rotation, rotateTo);
-
-        if (angleDifference > angleThreshold)
+        if (!zoomedIn)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, rotateTime * Time.deltaTime);
+            float angleDifference = Quaternion.Angle(transform.rotation, rotateTo);
+
+            if (angleDifference > angleThreshold)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotateTo, rotateTime * Time.deltaTime);
+            }
+            else
+            {
+                transform.rotation = rotateTo;
+            }
         }
         else
         {
-            transform.rotation = rotateTo;
+            float angleDifference = Quaternion.Angle(transform.rotation, zoomInRotation);
+
+            if (angleDifference > angleThreshold)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, zoomInRotation, rotateTime * Time.deltaTime);
+            }
+            else
+            {
+                transform.rotation = zoomInRotation;
+            }
+        }
+
+        float moveDifference = Vector3.Distance(transform.position, moveTo);
+
+        if (moveDifference > moveThreshold)
+        {
+            transform.position = Vector3.Slerp(transform.position, moveTo, moveTime * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = moveTo;
         }
     }
 
-    public void OnLeaveChair()
-    {
-        Debug.Log("Leave Chair");
-        switchCamera.Invoke();
-    }
+    //public void OnLeaveChair()
+    //{
+    //    Debug.Log("Leave Chair");
+    //    switchCamera.Invoke();
+    //}
 
-    public void OnTopDown()
-    {
-        Debug.Log("Top Down");
-        topDown.Invoke();
-    }
+    //public void OnTopDown()
+    //{
+    //    Debug.Log("Top Down");
+    //    topDown.Invoke();
+    //}
 
     public void RotateLeft()
     {
-        if (rotateTo != defaultRotation) return;
+        if (lookingLeft || zoomedIn) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.y -= rotateLeftBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate left");
+        if (lookingRight)
+        {
+            lookingRight = false;
+            RotateStraight();
+        }
+        else
+        {
+            rotateTo = Quaternion.Euler(lookLeftEuler);
+            lookingLeft = true;
+        }
+
+        //Debug.Log("Rotate left");
     }
     public void RotateRight()
     {
-        if (rotateTo != defaultRotation) return;
+        if (lookingRight || zoomedIn) return;
 
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.y += rotateRightBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate right");
-    }
+        if (lookingLeft)
+        {
+            lookingLeft = false;
+            RotateStraight();
+        }
+        else
+        {
+            rotateTo = Quaternion.Euler(lookRightEuler);
+            lookingRight = true;
+        }
 
-    public void RotateUp()
-    {
-        if (rotateTo != defaultRotation) return;
-
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.x -= rotateUpBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate up");
-    }
-
-    public void RotateDown()
-    {
-        if (rotateTo != defaultRotation) return;
-
-        Vector3 newEuler = defaultRotation.eulerAngles;
-        newEuler.x += rotateUpBy;
-        rotateTo = Quaternion.Euler(newEuler);
-        Debug.Log("Rotate down");
+        //Debug.Log("Rotate right");
     }
 
     public void RotateStraight()
@@ -93,6 +133,21 @@ public class CockpitCamera : MonoBehaviour
         if (rotateTo == defaultRotation) return;
 
         rotateTo = defaultRotation;
-        Debug.Log("Rotate straight");
+        //Debug.Log("Rotate straight");
+    }
+
+    public void ZoomIn(Vector3 movePosition, Quaternion moveRotation)
+    {
+        moveTo = movePosition;
+        zoomInRotation = moveRotation;
+        zoomedIn = true;
+        //Debug.Log("Zoomed in");
+    }
+
+    public void ZoomOut()
+    {
+        moveTo = defaultPosition;
+        zoomedIn = false;
+        //Debug.Log("Zoomed out");
     }
 }
