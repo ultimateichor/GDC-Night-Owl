@@ -108,7 +108,7 @@ public class CockpitCamera : MonoBehaviour
             lookingLeft = true;
         }
 
-        Debug.Log("Rotate left");
+        //Debug.Log("Rotate left");
     }
     public void RotateRight()
     {
@@ -125,7 +125,7 @@ public class CockpitCamera : MonoBehaviour
             lookingRight = true;
         }
 
-        Debug.Log("Rotate right");
+        //Debug.Log("Rotate right");
     }
 
     public void RotateStraight()
@@ -133,7 +133,7 @@ public class CockpitCamera : MonoBehaviour
         if (rotateTo == defaultRotation) return;
 
         rotateTo = defaultRotation;
-        Debug.Log("Rotate straight");
+        //Debug.Log("Rotate straight");
     }
 
     public void ZoomIn(Vector3 movePosition, Quaternion moveRotation)
@@ -141,13 +141,13 @@ public class CockpitCamera : MonoBehaviour
         moveTo = movePosition;
         zoomInRotation = moveRotation;
         zoomedIn = true;
-        Debug.Log("Zoomed in");
+        //Debug.Log("Zoomed in");
     }
 
     public void ZoomOut()
     {
         moveTo = defaultPosition;
         zoomedIn = false;
-        Debug.Log("Zoomed out");
+        //Debug.Log("Zoomed out");
     }
 }

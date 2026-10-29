@@ -23,7 +23,7 @@ public class TrainMovement : MonoBehaviour
         }
 
         fuelDownTimer = 0f;
-        currentMoveSpeed = Mathf.RoundToInt(0.5f * maxMoveSpeed);
+        currentMoveSpeed = 2;
         currentFuelAmount = maxFuelAmount;
     }
 
@@ -47,7 +47,7 @@ public class TrainMovement : MonoBehaviour
                 break;
         }
 
-        if (Mathf.RoundToInt(fuelDownTimer) >= currentFuelDownSpeed || currentFuelDownSpeed != 0)
+        if (Mathf.RoundToInt(fuelDownTimer) >= currentFuelDownSpeed && currentFuelDownSpeed != 0)
         {
             if (currentFuelAmount > 0)
             {

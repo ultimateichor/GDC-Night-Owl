@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         isAlive = false;
         deathScreen.gameObject.SetActive(true);
         deathScreen.EnableDeathScreen(roundedSurvivalTimer);
-        Debug.Log("You Died");
+        //Debug.Log("You Died");
     }
 
     public void RestartGame()
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         deathScreen.gameObject.SetActive(false);
         winScreen.gameObject.SetActive(false);
         OnRestart.Invoke();
-        Debug.Log("Restarted Game");
+        //Debug.Log("Restarted Game");
     }
 
     private void WinGame()
@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         wonGame = true;
         winScreen.gameObject.SetActive(true);
         winScreen.EnableWinScreen(roundedSurvivalTimer);
-        Debug.Log("You Won after " + roundedSurvivalTimer + " seconds!");
+        //Debug.Log("You Won after " + roundedSurvivalTimer + " seconds!");
+    }
+
+    public float GetSurvivalTime()
+    {
+        return timeToSurvive;
     }
 }
