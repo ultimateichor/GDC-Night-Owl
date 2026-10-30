@@ -44,7 +44,7 @@ public class ZoomInObject : MonoBehaviour
     private void ZoomIn()
     {
         if (isZoomedIn) return;
-        Debug.Log("Player clicked on zoom object");
+        //Debug.Log("Player clicked on zoom object");
 
         Zoom.Invoke(zoomObject.transform.position, zoomObject.transform.rotation);
         isZoomedIn = true;
@@ -53,7 +53,7 @@ public class ZoomInObject : MonoBehaviour
     private void ZoomOut()
     {
         if (!isZoomedIn) return;
-        Debug.Log("Player pressed the button to unzoom");
+        //Debug.Log("Player pressed the button to unzoom");
 
         UnZoom.Invoke();
         isZoomedIn = false;

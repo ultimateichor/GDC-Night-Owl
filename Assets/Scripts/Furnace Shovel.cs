@@ -50,7 +50,7 @@ public class FurnaceShovel : MonoBehaviour
         Debug.Log("Picked up the shovel");
     }
 
-    private void SetDown()
+    public void SetDown()
     {
         //put the shovel back to starting position
         isPickedUp = false;
