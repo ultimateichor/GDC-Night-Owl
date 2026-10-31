@@ -31,6 +31,7 @@ public class FurnaceObject : MonoBehaviour
                 if (hit.transform == this.transform && shovel.IsPickedUp())
                 {
                     AddToFuel();
+                    shovel.SetDown();
                 }
             }
         }
