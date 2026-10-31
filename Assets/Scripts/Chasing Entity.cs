@@ -93,4 +93,12 @@ public class ChasingEntity : MonoBehaviour
     {
         return distanceFromPlayer;
     }
+
+    public void Restart()
+    {
+        distanceFromPlayer = maxDistanceFromPlayer;
+        currentTrainSpeed = 0;
+        deathTimer = 0;
+        moveTimer = 0;
+    }
 }

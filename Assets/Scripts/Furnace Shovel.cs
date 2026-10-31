@@ -61,4 +61,9 @@ public class FurnaceShovel : MonoBehaviour
     {
         return isPickedUp;
     }
+
+    public void Restart()
+    {
+        SetDown();
+    }
 }
