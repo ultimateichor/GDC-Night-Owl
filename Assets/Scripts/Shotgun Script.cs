@@ -105,4 +105,11 @@ public class ShotgunScript : MonoBehaviour
     {
         return isPickedUp;
     }
+
+    public void Restart()
+    {
+        isPickedUp = false;
+        startingPosition = transform.position;
+        currentAmmo = maxAmmo;
+    }
 }
