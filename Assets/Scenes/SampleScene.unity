@@ -10300,11 +10300,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChasingEntity
   trainMovement: {fileID: 2000047385}
   gameManager: {fileID: 1529731613}
-  maxDistanceFromPlayer: 10
-  oneSpeedMovement: -1
-  twoSpeedMovement: 0
-  threeSpeedMovement: 1
-  zeroSpeedMovement: -2
+  maxDistanceFromPlayer: 50
+  oneSpeedMovement: -6
+  twoSpeedMovement: -3
+  threeSpeedMovement: 3
+  zeroSpeedMovement: -15
   timeTillDeath: 3
   maxMoveTimer: 5
 --- !u!4 &1939074963
@@ -10603,10 +10603,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrainMovement
   console: {fileID: 1207285778}
   maxMoveSpeed: 3
-  maxFuelAmount: 10
-  fastFuelDownSpeed: 5
-  mediumFuelDownSpeed: 10
-  slowFuelDownSpeed: 15
+  maxFuelAmount: 20
+  fastFuelDownSpeed: 3
+  mediumFuelDownSpeed: 6
+  slowFuelDownSpeed: 9
 --- !u!4 &2000047386
 Transform:
   m_ObjectHideFlags: 0
@@ -11368,6 +11368,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1529731612}
+  - {fileID: 2000047386}
   - {fileID: 1838088223}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -11375,7 +11376,6 @@ SceneRoots:
   - {fileID: 922767775}
   - {fileID: 795965313}
   - {fileID: 1384376938}
-  - {fileID: 2000047386}
   - {fileID: 1125686744}
   - {fileID: 710235221}
   - {fileID: 1244216092}
