@@ -66,7 +66,7 @@ public class ChasingEntity : MonoBehaviour
                 distanceFromPlayer = 0;
             }
 
-            Debug.Log("The chaser is " + distanceFromPlayer + " away from the train");
+            //Debug.Log("The chaser is " + distanceFromPlayer + " away from the train");
             moveTimer = 0;
         }
         
@@ -87,5 +87,10 @@ public class ChasingEntity : MonoBehaviour
     private void KillPlayer()
     {
         gameManager.GameOver();
+    }
+
+    public int GetDistance()
+    {
+        return distanceFromPlayer;
     }
 }
